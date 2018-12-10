@@ -19,9 +19,12 @@ The query macro is just like object, but it handles some extra defaults for us t
 C -> Absinthe.Schema.lookup_type(PlateSlateWeb.Schema, "RootQueryType")
 
 (Items is for Ecto Schema and items is for table name)
-mix phx.gen.schema Menu.Items items (to create migrations for DB which will be similar to Ecto.Schema)
+mix phx.gen.schema Menu.Items items 
+(to create migrations for DB which will be similar to Ecto.Schema)
 add the fields in both ecto schema and DB migrations
 
-Our :menu_items field doesn’t actually build the list of menu items yet. To do that, we have to retrieve the data for the field. GraphQL refers to this as res- olution, and it’s done by defining a resolver for our field.
+`Our :menu_items field doesn’t actually build the list of menu items yet. To do that, we have to retrieve the data for the field. GraphQL refers to this as res- olution, and it’s done by defining a resolver for our field.`
 
-mix ecto.migrate 
+mix ecto.migrate (to create table out of the migrations, to be speciific it runs the command from the migrations)
+add dummy data in seeds.exs
+mix run priv/repo/seeds.exs (to fire commands in seeds.ex)
