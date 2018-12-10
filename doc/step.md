@@ -43,3 +43,6 @@ Goto browser hit 0.0.0.0/graphiql
 }
 `
 fire query to get the result...
+Once the server is up ,
+client can get schema.json by using 
+`apollo schema:download --endpoint=http://localhost:4000/api schema.json`
