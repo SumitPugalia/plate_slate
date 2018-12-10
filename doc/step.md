@@ -22,6 +22,7 @@ For query we require Ecto.Schema so
 add plate_slate/menu/item.ex (this is the one that is analogus to DB)
 Our :menu_items field doesn’t actually build the list of menu items yet. To do that, we have to retrieve the data for the field. GraphQL refers to this as res- olution, and it’s done by defining a resolver for our field.
 
+(Items is for Ecto Schema and items is for table name)
 mix phx.gen.schema Items items (to create migrations for DB which will be similar to Ecto.Schema)
 add the fields 
 mix ecto.migrate 
