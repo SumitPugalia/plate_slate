@@ -30,3 +30,16 @@ add dummy data in seeds.exs
 mix run priv/repo/seeds.exs (to fire commands in seeds.ex)
 
 update the router.ex to expose the endpoints
+
+mix phx.server 
+Goto browser hit 0.0.0.0/graphiql
+`
+{
+  menuItems { 
+    id
+		name
+    description
+  }
+}
+`
+fire query to get the result...
