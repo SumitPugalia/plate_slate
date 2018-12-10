@@ -13,7 +13,7 @@ defmodule PlateSlateWeb.Schema do
     field :id, :id, description: "primary id"
     field :name, :string, description: "name of the item"
     field :description, :string, description: "describe the item"
-    field :price, :string, description: "price of the item"
+    field :price, :float, description: "price of the item"
     field :added_on, :string, description: "created at"
   end
 end
