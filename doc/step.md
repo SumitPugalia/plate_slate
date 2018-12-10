@@ -13,3 +13,4 @@ in mix.exs (Dependencies for graphql)
 mix deps.get
 
 create plate_slate_web/schema.ex for the Object type(menu_item).
+C -> Absinthe.Schema.lookup_type(PlateSlateWeb.Schema, "MenuItem")
