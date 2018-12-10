@@ -28,3 +28,5 @@ add the fields in both ecto schema and DB migrations
 mix ecto.migrate (to create table out of the migrations, to be speciific it runs the command from the migrations)
 add dummy data in seeds.exs
 mix run priv/repo/seeds.exs (to fire commands in seeds.ex)
+
+update the router.ex to expose the endpoints
