@@ -46,3 +46,5 @@ fire query to get the result...
 Once the server is up ,
 client can get schema.json by using 
 `apollo schema:download --endpoint=http://localhost:4000/api schema.json`
+
+Add the lib/plate_slate/seeds.ex for ExUnit Seeding
