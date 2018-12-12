@@ -39,6 +39,13 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 	"""
 	@variables %{"term" => "Tea"}
 
+	@query_sort """ 
+	{
+  	menuItems(order: DESC) {
+    	name
+		} 
+	}
+	"""
 	test "menuItems field returns menu items" do
 		conn = build_conn()
 		conn = get conn, "/api", query: @query
@@ -86,6 +93,16 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 				]
 			} 
 		}
+	end
+
+
+	test "menuItems field returns items descending using literals" do
+		response = get(build_conn(), "/api", query: @query_sort) 
+		assert %{
+			"data" => %{"menuItems" => [
+				%{"name" => "Tea"} | _]
+			} 
+		} = json_response(response, 200)
 	end
 
 end

@@ -57,3 +57,4 @@ and the business logic (plate_slate/menu/)
 Add tests..
 ## We can use GET/POST, both works fine :)
 
+Add Enum type in schema for ordering the result.
