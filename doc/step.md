@@ -58,3 +58,5 @@ Add tests..
 ## We can use GET/POST, both works fine :)
 
 Add Enum type in schema for ordering the result.
+
+We’re providing the order as DESC, and without quotes. By convention, enum values are passed in all uppercase letters.

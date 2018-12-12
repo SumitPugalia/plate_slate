@@ -94,8 +94,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 			} 
 		}
 	end
-
-
+	
 	test "menuItems field returns items descending using literals" do
 		response = get(build_conn(), "/api", query: @query_sort) 
 		assert %{
