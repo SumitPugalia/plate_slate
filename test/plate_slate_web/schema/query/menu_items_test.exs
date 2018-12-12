@@ -29,6 +29,16 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 		} 
 	}
 	"""
+
+	@query_variable """
+		query ($term: String) {
+  	menuItems(matching: $term) {
+    	name
+		} 
+	}
+	"""
+	@variables %{"term" => "Tea"}
+
 	test "menuItems field returns menu items" do
 		conn = build_conn()
 		conn = get conn, "/api", query: @query
@@ -62,6 +72,20 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 		assert %{"errors" => [
 			%{"message" => message}
 		]} = json_response(response, 200) # check how to send this as 400..
+		
 		assert message == "Argument \"matching\" has invalid value 123."
 	end
+
+	test "menuItems field filters by name when using a variable" do
+		conn = build_conn()
+		response = get(conn, "/api", query: @query_variable, variables: @variables) 
+		assert json_response(response, 200) == %{
+			"data" => %{ 
+				"menuItems" => [
+					%{"name" => "Tea"}
+				]
+			} 
+		}
+	end
+
 end
