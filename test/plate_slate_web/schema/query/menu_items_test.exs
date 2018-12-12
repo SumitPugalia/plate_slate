@@ -45,8 +45,8 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 		assert json_response(conn, 200) == %{
 			"data" => %{
 				"menuItems" => [
-					%{"name" => "Roti"},
 					%{"name" => "Palak Paneer"},
+					%{"name" => "Roti"},
 					%{"name" => "Tea"}
 				]
 			}
