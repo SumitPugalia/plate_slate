@@ -21,6 +21,14 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 		} 
 	}
 	"""
+
+	@query_invalid """ 
+	{
+  	menuItems(matching: 123) {
+    	name
+		} 
+	}
+	"""
 	test "menuItems field returns menu items" do
 		conn = build_conn()
 		conn = get conn, "/api", query: @query
@@ -45,5 +53,15 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 				]
 			}
 		}
+	end
+
+	test "menuItems field returns errors when using a bad value" do
+		conn = build_conn()
+		response = get(conn, "/api", query: @query_invalid) 
+		
+		assert %{"errors" => [
+			%{"message" => message}
+		]} = json_response(response, 200) # check how to send this as 400..
+		assert message == "Argument \"matching\" has invalid value 123."
 	end
 end
