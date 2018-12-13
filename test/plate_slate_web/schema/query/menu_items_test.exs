@@ -16,7 +16,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 
 	@query_single """
 	{
-  	menuItems(matching: "Tea") {
+  	menuItems(filter: {name: "Tea"}) {
     	name
 		} 
 	}
@@ -24,7 +24,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 
 	@query_invalid """ 
 	{
-  	menuItems(matching: 123) {
+  	menuItems(filter: {name: 123}) {
     	name
 		} 
 	}
@@ -32,12 +32,12 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 
 	@query_variable """
 		query ($term: String) {
-  	menuItems(matching: $term) {
+  	menuItems(filter: $term) {
     	name
 		} 
 	}
 	"""
-	@variables %{"term" => "Tea"}
+	@variables %{"term" => %{:name => "Tea"}}
 
 	@query_sort """ 
 	{
@@ -80,7 +80,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 			%{"message" => message}
 		]} = json_response(response, 200) # check how to send this as 400..
 		
-		assert message == "Argument \"matching\" has invalid value 123."
+		assert message == "Argument \"filter\" has invalid value {name: 123}.\nIn field \"name\": Expected type \"String\", found 123."
 	end
 
 	test "menuItems field filters by name when using a variable" do
@@ -94,7 +94,7 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 			} 
 		}
 	end
-	
+
 	test "menuItems field returns items descending using literals" do
 		response = get(build_conn(), "/api", query: @query_sort) 
 		assert %{
