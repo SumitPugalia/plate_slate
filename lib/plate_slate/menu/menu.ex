@@ -27,7 +27,6 @@ defmodule PlateSlate.Menu.Menu do
   # end
 
   def list_items(args) do 
-    IO.inspect Menu.Item
     args
     |> Enum.reduce(Menu.Item, fn 
       {:order, order}, query ->
