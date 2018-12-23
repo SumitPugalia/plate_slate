@@ -3,6 +3,19 @@ defmodule PlateSlateWeb.Schema do
   alias PlateSlateWeb.Resolvers
   alias PlateSlate.{Menu, Repo}
 
+  scalar :date do 
+    parse fn input ->
+      case Date.from_iso8601(input.value) do 
+        {:ok, date} -> {:ok, date}
+        _ -> :error
+      end 
+    end
+
+    serialize fn date -> 
+      Date.to_iso8601(date) 
+    end 
+  end
+
   enum :sort_order do 
     value :asc
     value :desc
@@ -25,6 +38,12 @@ defmodule PlateSlateWeb.Schema do
     
     @desc "Priced below a value" 
     field :priced_below, :float
+
+    @desc "Added to the menu before this date"
+    field :added_before, :date
+    
+    @desc "Added to the menu after this date"
+    field :added_after, :date
   end
 
   @desc "The list of available items on the menu"

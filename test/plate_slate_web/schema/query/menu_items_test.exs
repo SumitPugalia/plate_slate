@@ -119,4 +119,21 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 		assert %{"data" => %{"menuItems" => [%{"name" => "Tea"}]} } == json_response(response, 200)
 	end
 
+	@query_with_date """
+		query ($filter: MenuItemFilter!) {
+		     menuItems(filter: $filter) {
+		       name
+		addedOn }
+		}
+	"""
+	@variables_with_date %{filter: %{"addedBefore" => "2018-04-11"}} 
+	test "menuItems filtered by custom scalar" do
+		response = get(build_conn(), "/api", query: @query_with_date, variables: @variables_with_date) 
+		assert %{
+			"data" => %{
+			"menuItems" => [%{"name" => "Roti", "addedOn" => "2018-04-11"}]
+       }
+     } == json_response(response, 200)
+end
+
 end

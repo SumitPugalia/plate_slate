@@ -63,4 +63,8 @@ We’re providing the order as DESC, and without quotes. By convention, enum val
 
 Mixed in with other arguments that we add to the field, this can quickly become a hodgepodge of various flags and options that would be better organized into related groupings. GraphQL gives us a tool to do this: input object types.
 
-add nonnull macro for required data
+add `nonnull` macro for required data
+
+create own scalar type, it have 2 functions parse and serialize.
+• parse converts a value coming from the user into an Elixir term (or returns :error).
+• serialize converts an Elixir term back into a value that can be returned via JSON.
