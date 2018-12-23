@@ -121,9 +121,10 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 
 	@query_with_date """
 		query ($filter: MenuItemFilter!) {
-		     menuItems(filter: $filter) {
-		       name
-		addedOn }
+	    menuItems(filter: $filter) {
+	      name
+				addedOn 
+			}
 		}
 	"""
 	@variables_with_date %{filter: %{"addedBefore" => "2018-04-11"}} 
@@ -134,6 +135,19 @@ defmodule PlateSlateWeb.Schema.Query.MenuItemsTest do
 			"menuItems" => [%{"name" => "Roti", "addedOn" => "2018-04-11"}]
        }
      } == json_response(response, 200)
-end
+	end
+
+	@variables %{filter: %{"addedBefore" => "not-a-date"}} 
+	test "menuItems filtered by custom scalar with error" do
+		response = get(build_conn(), "/api", query: @query_with_date, variables: @variables)
+		assert %{"errors" => [%{"locations" => [
+			%{"column" => 0, "line" => 2}], "message" => message}
+	  ]} = json_response(response, 200)
+		expected = """
+			Argument "filter" has invalid value $filter.
+			In field "addedBefore": Expected type "Date", found "not-a-date".\
+			"""
+		assert expected == message
+	end
 
 end
