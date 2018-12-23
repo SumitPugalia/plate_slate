@@ -30,6 +30,7 @@ defmodule PlateSlateWeb.Schema do
   @desc "The list of available items on the menu"
   query do
     field :menu_items, list_of(:menu_item) do
+      # arg :filter, non_null(:menu_item_filter)
       arg :filter, :menu_item_filter
       arg :order, type: :sort_order, default_value: :asc #keyword list way
       resolve &Resolvers.Menu.menu_items/3

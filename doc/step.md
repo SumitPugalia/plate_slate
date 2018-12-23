@@ -63,3 +63,4 @@ We’re providing the order as DESC, and without quotes. By convention, enum val
 
 Mixed in with other arguments that we add to the field, this can quickly become a hodgepodge of various flags and options that would be better organized into related groupings. GraphQL gives us a tool to do this: input object types.
 
+add nonnull macro for required data
