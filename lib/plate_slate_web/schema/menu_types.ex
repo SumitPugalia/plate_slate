@@ -1,6 +1,7 @@
 defmodule PlateSlateWeb.Schema.MenuTypes do 
   use Absinthe.Schema.Notation
-  @desc "Filtering options for the menu item list" 
+  alias PlateSlateWeb.Resolvers
+
   @desc "Filtering options for the menu item list" 
   input_object :menu_item_filter do
     
@@ -25,7 +26,7 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     @desc "Added to the menu after this date"
     field :added_after, :date
   end
-  
+
   object :menu_item do
     field :id, :id, description: "primary id"
     field :name, :string, description: "name of the item"
@@ -33,4 +34,14 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     field :price, :float, description: "price of the item"
     field :added_on, :string, description: "created at"
   end
+
+  object :menu_queries do
+  	field :menu_items, list_of(:menu_item) do
+      # arg :filter, non_null(:menu_item_filter)
+      arg :filter, :menu_item_filter
+      arg :order, type: :sort_order, default_value: :asc #keyword list way
+      resolve &Resolvers.Menu.menu_items/3
+    end
+  end
+
 end

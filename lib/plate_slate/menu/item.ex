@@ -8,8 +8,7 @@ defmodule PlateSlate.Menu.Item do
     field :description, :string
     field :name, :string
     field :price, :decimal
-    
-    #belongs_to :category, PlateSlate.Menu.Category
+    # belongs_to :category, PlateSlate.Menu.Category
     
     #many_to_many :tags, PlateSlate.Menu.ItemTag,
     #  join_through: "items_taggings"

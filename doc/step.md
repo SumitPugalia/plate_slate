@@ -68,3 +68,6 @@ add `nonnull` macro for required data
 create own scalar type, it have 2 functions parse and serialize.
 • parse converts a value coming from the user into an Elixir term (or returns :error).
 • serialize converts an Elixir term back into a value that can be returned via JSON.
+
+create plate_slate_web/schema/menu_types.ex for splitting all the objects from schema
+`it’s important to keep your business logic inside your context modules—don’t pull it into your resolvers or duplicate it there. Think of your resolvers as a way to trigger your business logic, a way to wire it into schema.`
