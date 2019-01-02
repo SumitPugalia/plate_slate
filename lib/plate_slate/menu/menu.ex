@@ -60,4 +60,10 @@ defmodule PlateSlate.Menu.Menu do
       #   where: ilike(t.name, ^"%#{tag_name}%")
     end)
   end
+
+  def create_item(attrs \\ %{}) do 
+    %Menu.Item{}
+    |> Menu.Item.changeset(attrs)
+    |> Repo.insert()
+  end
 end

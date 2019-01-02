@@ -16,6 +16,16 @@ defmodule PlateSlateWeb.Schema do
     end 
   end
 
+  scalar :decimal do 
+    parse fn
+      %{value: value}, _ -> 
+        Decimal.parse(value)
+      _, _ ->
+        :error
+    end
+    serialize &to_string/1
+  end
+
   enum :sort_order do 
     value :asc
     value :desc
@@ -24,6 +34,10 @@ defmodule PlateSlateWeb.Schema do
   @desc "The list of available items on the menu"
   query do
     import_fields :menu_queries
+  end
+
+  mutation do
+    import_fields :menu_create
   end
 
 end

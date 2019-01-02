@@ -27,6 +27,12 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
     field :added_after, :date
   end
 
+  input_object :menu_item_input do 
+    field :name, non_null(:string) 
+    field :description, :string
+    field :price, non_null(:decimal) 
+  end
+
   object :menu_item do
     field :id, :id, description: "primary id"
     field :name, :string, description: "name of the item"
@@ -41,6 +47,13 @@ defmodule PlateSlateWeb.Schema.MenuTypes do
       arg :filter, :menu_item_filter
       arg :order, type: :sort_order, default_value: :asc #keyword list way
       resolve &Resolvers.Menu.menu_items/3
+    end
+  end
+
+  object :menu_create do
+    field :create_menu_item, :menu_item do
+      arg :input, non_null(:menu_item_input) 
+      resolve &Resolvers.Menu.create_item/3
     end
   end
 

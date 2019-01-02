@@ -23,7 +23,7 @@ mix phx.gen.schema Menu.Items items
 (to create migrations for DB which will be similar to Ecto.Schema)
 add the fields in both ecto schema and DB migrations
 
-`Our :menu_items field doesn’t actually build the list of menu items yet. To do that, we have to retrieve the data for the field. GraphQL refers to this as res- olution, and it’s done by defining a resolver for our field.`
+`Our :menu_items field doesn’t actually build the list of menu items yet. To do that, we have to retrieve the data for the field. GraphQL refers to this as resolution, and it’s done by defining a resolver for our field.`
 
 mix ecto.migrate (to create table out of the migrations, to be speciific it runs the command from the migrations)
 add dummy data in seeds.exs
@@ -71,3 +71,15 @@ create own scalar type, it have 2 functions parse and serialize.
 
 create plate_slate_web/schema/menu_types.ex for splitting all the objects from schema
 `it’s important to keep your business logic inside your context modules—don’t pull it into your resolvers or duplicate it there. Think of your resolvers as a way to trigger your business logic, a way to wire it into schema.`
+
+Union Types and Interface in GraphQl
+
+## Mutation
+
+Add the Root query of mutation
+and add the fields similR To the query 
+
+`It’s easy to forget that you can’t use object types for user input; instead, you need to create input object types for use in arguments. While this might seem like unnecessary work at first, you’ll come to appreciate the way it forces you to focus on the discrete package of data that you need for specific mutations.
+There are also some technical differences between objects and input objects. Input object fields can only be valid input types, which excludes unions, interfaces, and objects. You also can’t form cycles with input objects, whereas cycles are permitted with objects.`
+
+`We are using the name input here because it’s a convention of the Relay client-side framework1 for mutations, but we could use a different name instead if we were so inclined.`
