@@ -19,7 +19,7 @@ defmodule PlateSlateWeb.Schema.Mutation.CreateMenuTest do
     menu_item = %{
       "name" => "French Dip",
       "description" => "Roast beef, caramelized onions, horseradish, ...", 
-      "price" => "5.75",
+      "price" => "5.75"
     }
     conn = build_conn()
     conn = post conn, "/api", query: @query, variables: %{"menuItem" => menu_item}
@@ -32,5 +32,25 @@ defmodule PlateSlateWeb.Schema.Mutation.CreateMenuTest do
         } 
       }
     }
-  end 
+  end
+
+  test "creating a menu item with an existing name fails", _ do
+    menu_item = %{
+      "name" => "Exist",
+      "description" => "Roast beef, caramelized onions, horseradish, ...",
+      "price" => "5.75"
+    }
+    conn = build_conn()
+    conn = post conn, "/api", query: @query, variables: %{"menuItem" => menu_item}
+    conn = post conn, "/api", query: @query, variables: %{"menuItem" => menu_item}
+    assert json_response(conn, 200) == %{ 
+      "data" => %{"createMenuItem" => nil}, 
+      "errors" => [%{
+        "locations" => [%{"column" => 0, "line" => 2}], 
+        "message" => "Could not create menu item",
+        "details" => %{"name" => ["has already been taken"]}, 
+        "path" => ["createMenuItem"]
+      }]
+    }
+  end
 end
